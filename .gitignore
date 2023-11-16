@@ -1,0 +1,27 @@
+# Binarios para programas y complementos
+*.exe
+*.exe~
+*.dll
+*.so
+*.dylib
+
+# Directorio de prueba
+_test.go
+
+# Archivos de salida
+*.out
+
+# Dependencias
+/vendor/
+
+# Archivos de log
+*.log
+
+# Archivos de configuración
+*.json
+*.toml
+*.xml
+
+# Directorios de IDE
+.idea/
+.vscode/
