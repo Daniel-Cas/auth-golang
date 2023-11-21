@@ -1,0 +1,13 @@
+version: '3.9'
+
+services:
+  cassandra:
+    image: cassandra:5
+    ports:
+      - "9042:9042"
+    volumes:
+        - ./cassandra:/var/lib/cassandra
+    environment:
+      - CASSANDRA_CLUSTER_NAME=MainCluster
+      - CASSANDRA_USERNAME=dev
+      - CASSANDRA_PASSWORD=secret

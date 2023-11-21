@@ -6,9 +6,10 @@ import (
 )
 
 type UserService struct {
-	Repository repository.UserRepository
+	Repository *repository.UserRepository
 }
 
+/*
 func (service *UserService) FindAll() ([]domain.User, error) {
 	return service.Repository.FindAll()
 }
@@ -16,7 +17,8 @@ func (service *UserService) FindAll() ([]domain.User, error) {
 func (service *UserService) FindById(id int) (domain.User, error) {
 	return service.Repository.FindById(id)
 }
+*/
 
-func (service *UserService) Save(user domain.User) (domain.User, error) {
+func (service *UserService) Save(user *domain.User) error {
 	return service.Repository.Save(user)
 }

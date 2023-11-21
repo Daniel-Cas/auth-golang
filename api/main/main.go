@@ -1,24 +1,20 @@
 package main
 
 import (
-	"auth-golang/controller"
-	"github.com/gin-gonic/gin"
+	"auth-golang/api/route"
+	"auth-golang/config"
+	"auth-golang/database"
 )
 
 func main() {
-	router := gin.Default()
+	cassandraSession, _ := database.Connect()
+	router := route.SetupRouter()
 
-	userController := controller.UserController{}
+	repository := config.ConfigRepository{Session: cassandraSession}
 
-	router.GET("/users", userController.GetAll)
-	router.GET("/user/:id", userController.GetById)
-	router.POST("/user", userController.Save)
+	repository.Init()
 
-	router.GET("/ping", func(ctx *gin.Context) {
-		ctx.JSON(200, gin.H{
-			"message": "pong",
-		})
-	})
+	defer cassandraSession.Close()
 
 	router.Run(":8080")
 }
