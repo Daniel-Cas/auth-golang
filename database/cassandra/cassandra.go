@@ -1,4 +1,4 @@
-package database
+package cassandra
 
 import (
 	"context"
@@ -33,7 +33,7 @@ func Connect() (*gocql.Session, error) {
 }
 
 func CassandraMigrations(ctx context.Context, session *gocql.Session) {
-	migrationsDir := "database/migrations"
+	migrationsDir := "database/cassandra/migrations"
 
 	if err := migrate.Migrate(ctx, session, migrationsDir); err != nil {
 		log.Fatalf("Failed to apply migrations: %v", err)

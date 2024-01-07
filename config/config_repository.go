@@ -1,7 +1,7 @@
 package config
 
 import (
-	"auth-golang/database"
+	"auth-golang/database/cassandra"
 	"auth-golang/repository"
 	"context"
 	"github.com/gocql/gocql"
@@ -23,7 +23,7 @@ func (config *ConfigRepository) Init() {
 }
 
 func ExecuteMigrations(session *gocql.Session) {
-	database.CassandraMigrations(
+	cassandra.CassandraMigrations(
 		context.Background(), session,
 	)
 }
