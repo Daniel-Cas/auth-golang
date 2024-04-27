@@ -29,7 +29,14 @@ func (controller *UserController) GetAll(ctx *gin.Context) {
 func (controller *UserController) GetById(ctx *gin.Context) {
 	idParameter := ctx.Param("id")
 	id, err := gocql.ParseUUID(idParameter)
-	user, err := controller.Service.FindById(id)
+	user, notFound := controller.Service.FindById(id)
+
+	if notFound != nil {
+		ctx.JSON(404, gin.H{
+			"message": "User not found",
+		})
+		return
+	}
 
 	if err != nil {
 		ctx.JSON(500, gin.H{
